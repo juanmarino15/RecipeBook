@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="row">
+        <div class="col-sm-5 form-group">
+          <label for="name">Name</label>
+          <input 
+          type="text" 
+          id="name" 
+          class="form-control"
+          name = "name"
+          ngModel
+          required>
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="amount"> Amount</label>
+          <input 
+          type="number" 
+          id="amount" 
+          class="form-control"
+          name="amount"
+          ngModel
+          required
+          pattern="^[1-9]+[0-9]*$">
+          <!-- pattern validator helps with negative numbers. tjis is a regular expression -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <!-- the button name now checks if we are on edit mode. if we are, it will display udpate. If we are not, it will display add -->
+          <button class="btn btn-success" type="submit" [disabled]="!f.valid" >{{ editMode ? 'Update' : 'Add'}}</button> 
+          <button class="btn btn-danger" type="button" *ngIf="editMode" (click)="onDelete()">Delete</button>
+          <button class="btn btn-primary" type="button" (click)="onClear()">Clear</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
